@@ -1,4 +1,3 @@
-
 undSynthesizer>
 <CsOptions>
 	-odac ;Convertidor analogico digital
@@ -24,3 +23,6 @@ i1 1.01 1 587.33
  ; sonará el instrumento 1 desde el segundo 0 durante 5 segundos
 </CsScore>
 </CsoundSynthesizer>
+
+
+/* NO LE HAGAN CASO A ESTE ARCHIVO SOLO FUE UNA PRUEBA Y AÚN NO SÉ BIEN COMO  BORRARLO, SUBIRÉ EL CORRECTO EN UN RATO MÁS*/
