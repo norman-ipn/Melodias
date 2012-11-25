@@ -1,6 +1,4 @@
-</ CsoundSynthesizer>	
-     ejemplo1.wav
-
+<CsoundSynthesizer>	
 	<CsOptions>
 		-o ejemplo1.mp3
 	</CsOptions>
