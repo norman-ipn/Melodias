@@ -1,4 +1,4 @@
-oundSynthesizer>
+</ CsoundSynthesizer>	
      ejemplo1.wav
 
 	<CsOptions>
