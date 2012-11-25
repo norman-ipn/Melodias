@@ -30,11 +30,11 @@ oundSynthesizer>
 	        endin
 	
 	</CsInstruments>
-	
+	;Edición.
 	<CsScore>
 
                 ;CICLO do re mi fa sol la si
-                i 1	0	1	523.251
+                i 1	0	1	523.251; aquí van las frecuencias. ejemplo este es un Do o C
 		i 4	0	1	523.251
 		i 1	1.01	1	587.33
 		i 4	1.01	1	587.33
