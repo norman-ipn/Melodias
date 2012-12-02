@@ -1,11 +1,12 @@
 #ifndef __CSD_H__
 #define __CSD_H__
 
-#include<stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
-
-int escribir_encabezado(FILE*fp);
-int escribir_fin(FILE*fp);
-int escribir(FILE*fp,char*cadena,char*frecuencia);
+void file_start( FILE *fp );
+void file_end( FILE *fp );
+void write_line( FILE *fp, char note, char octave, char bemol, char sharp, float start );
 
 #endif
