@@ -21,6 +21,7 @@ Flores García María Fernanda\\
 Se pretende reafirmar los conocimientos adquiridos durante el curso de Teoría Computacional, tanto el conocimiento práctico como el conocimiento teórico que se abordo en clases y en las sesiones de laboratorio.
 
 \section{Introducción}
+
 Se conocerá paso a paso el proceso de desarrollo de un compilador de melodías. 
 
 Para la realización de este compilador de melodías fue necesario un arduo análisis que nos llevo a encontrar la gramática que lo modela y de también fue necesario crear las expresiones regulares que ayudaran al compilador a entender el lenguaje del usuario y tener una mejor interacción con este. 
@@ -43,6 +44,7 @@ Se conocerán a grandes rasgos las herramientas necesarias para el desarrollo y 
 \end{enumerate}
 
 \section{Marco Teórico}
+
 {\bf Flex} es una herramienta para generar escaneres. Un escaner, a veces llamado un señalizador, es un programa que reconoce patrones léxicos en el texto.El programa flex lee especificados por el usuario archivos de entrada, o la entrada estándar si no se dan los nombres de archivo, para una descripción de un escáner a generar. La descripción está en la forma de parejas de expresiones regulares y código C, denominadas reglas. Flex genera un archivo fuente en C llamado "lex.yy.c", que define la función yylex (). El archivo "lex.yy.c" se puede compilar y enlazar para producir un ejecutable. Cuando el fichero ejecutable, este analiza su entrada en busca de casos de texto que coincidan con las expresiones regulares para cada regla. Cuando se encuentra una coincidencia, se ejecuta el código C correspondiente. \\
 
 
@@ -76,7 +78,6 @@ Un {\bf terminal}, conocido también como consola es un dispositivo electrónico
 \item Corregir los errores encontrados.\\
 \item Volver  a correr el programa.\\
 \item En caso de que el programa ya no cuente con errores, se procede con la documentación, que en este caso es este archivo en Latex.\\
-
 \end{enumerate}
 
 \section{Códigos}
@@ -372,7 +373,7 @@ void write_line( FILE *fp, char note, char octave, char bemol, char sharp, float
 
                 ;
 CICLO do re mi fa sol la si
-                       i 1	0	1	523.251; aquí van las frecuencias. ejemplo este es un Do o C
+                i 1	0	1	523.251; aquí van las frecuencias. ejemplo este es un Do o C
 		i 4	0	1	523.251
 		i 1	1.01	1	587.33
 		i 4	1.01	1	587.33
@@ -388,22 +389,22 @@ CICLO do re mi fa sol la si
 		i 2	6.01	1	987.767
 		i 1	7.01	1	1046.502
 		i 2	7.01	1	1046.502
-		i 1      9.01    1       1046.502
+		i 1     9.01    1       1046.502
 		i 2     9.01    1       1046.502
 		i 1     10.01   1       987.767
 		i 2     10.01   1       987.767
-        	           i 1     11.01   1       880
-                      i 2     11.01   1       880
-	           i 1     12.01   1       783.991
-	           i 2     12.01   1       783.991
-        	           i 1     13.01   1       698.456
-        	           i 2     13.01   1       698.456
-	           i 1     14.01   1       659.255
-                      i 2     14.01   1       659.255
-        	           i 1     15.01   1       587.33
-        	           i 2     15.01   1       587.33
-	           i 1     16.01   1       523.251
-	           i 2     16.01   1       523.251
+        	i 1     11.01   1       880
+                i 2     11.01   1       880
+	        i 1     12.01   1       783.991
+	        i 2     12.01   1       783.991
+                i 1     13.01   1       698.456
+        	i 2     13.01   1       698.456
+	        i 1     14.01   1       659.255
+                i 2     14.01   1       659.255
+        	i 1     15.01   1       587.33
+        	i 2     15.01   1       587.33
+	        i 1     16.01   1       523.251
+	        i 2     16.01   1       523.251
 	; la misma nota en graves y agudos.
 	
 		i 1	17.01	3	523.251
@@ -652,15 +653,15 @@ int main( int argc, char **argv )
 </CsoundSynthesizer>
 \end{lstlisting}\\
 
-
-
-
 \end{enumerate}
 
 
 \section{Conclusiones}
 
-{\bf Bustamante Escobar Juan Alfonso}
+{\bf Barrera Paredes Ricardo}\\
+Para codificar el compilador fue necesario el uso de expresiones regulares y gramaticas libres de contexto, por lo que sería necesario integrar un analizador léxico creado en flex y un analizador sintáctico creado en Bison, y al principio no sabía como integrar un analizador léxico creado en flex con un analizador sintáctico creado en Bison. Despues de ver ejemplos de otros compañeros comprendí que en flex se hacen las expresiones regulares básicas y que éstas se envian a las gramáticas para que sean trabajadas por ellas. Ahora en vez de poner codigo adicional en el .l, se coloca en el .y, ya que éste es el que tiene el código que se ejecutará cada vez que encuentren cadenas que puedan ser descritas con las gramáticas. Es interesante el uso de gramaticas y expresiones regulares para describir lenguajes y despues, gracias al lenguaje CSound, convertir esas simples 'partituras', en una melodia con formato .wav o .mp3, ya que CSound no lo hace por sí mismo.
+
+{\bf Bustamante Escobar Juan Alfonso}\\
 
 {\bf Flores García María Fernanda}\\
 La realización de esta práctica me pareció algo complicada, ya que si de por sí el trabajo en equipo ya es difícil, trabajar en equipo cuando no puedes interactuar de manera personal y en tiempo real con los compañeros de equipo se vuelve más difícil. Pero a decir verdad, me parece un muy buen método de evaluación del trabajo en equipo, ya que se pueden observar  las aportaciones de cada alumno al desarrollo del proyecto, también podemos observar la poca capacidad del equipo para organizarse y tener un trabajo equilibrado, podemos observar que dado que el modelo de estudio habla de competencias, para el desarrollo de este proyecto el trabajo prácticamente fue individual, ya que cada quien se preocupo por su participación sin llegar en ningún momento a un acuerdo sobre la forma de trabajo y la organización de las actividades; se torno más una competencia para ver en que parte de este proyecto se podía participar.
