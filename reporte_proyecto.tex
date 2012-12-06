@@ -7,7 +7,7 @@
 \usepackage{listings}
 
 \title{\textbf{Compilador de Melodías}}
-\author{Barrera Paredes Ricardo\\
+\author{Balderas Paredes Ricardo\\
 Bustamante Escobar Juan Alfonso\\
 Flores García María Fernanda\\
   	}
@@ -657,11 +657,12 @@ int main( int argc, char **argv )
 
 \section{Conclusiones}
 
-{\bf Barrera Paredes Ricardo}\\
+{\bf Balderas Paredes Ricardo}\\
 Para codificar el compilador fue necesario el uso de expresiones regulares y gramaticas libres de contexto, por lo que sería necesario integrar un analizador léxico creado en flex y un analizador sintáctico creado en Bison, y al principio no sabía como integrar un analizador léxico creado en flex con un analizador sintáctico creado en Bison. Despues de ver ejemplos de otros compañeros comprendí que en flex se hacen las expresiones regulares básicas y que éstas se envian a las gramáticas para que sean trabajadas por ellas. Ahora en vez de poner codigo adicional en el .l, se coloca en el .y, ya que éste es el que tiene el código que se ejecutará cada vez que encuentren cadenas que puedan ser descritas con las gramáticas. Es interesante el uso de gramaticas y expresiones regulares para describir lenguajes y despues, gracias al lenguaje CSound, convertir esas simples 'partituras', en una melodia con formato .wav o .mp3, ya que CSound no lo hace por sí mismo.
 
 {\bf Bustamante Escobar Juan Alfonso}\\
-
+Para empezar creo que la idea de que se trabajara el proyecto de esta forma sonaba muy bien pues no habia la necesidad de que los integrantes del equipo estubieran en el mismo lugar para desarrollar este, es ahi donde aparece uno de los peros que en mi opinion entorpecieron un poco el desarrollo del proyecto, al estar limitada la comunicacion a este medio el cual en lo particular es nuevo para mi la organizacion no fue la optima pues algunos no sabian ni como hacer una pregunta, creo que desde un principio de bebieron dejar en claro muchas cosas acerca de las aportaciones al proyecto pues en algunos casos hubo compañeros aportando casi los mismos archivos pudiendo ocupar ese tiempo para el desarrollo de otra actividad, haciendo a un lado eso creo que la mayoria del equipo se baso en las aportaciones previas de los demas mienbros y mejoro el codigo que ya se habia subido, gracias a este proyecto pudimo reafirmar algunos conocimientos hacerca del funcionamiento del nuevo software que tal ves no teniamos bien claro
+ y que nos fueron de mucha ayuda tanto aqui en el proyecto como en la realizacion de las praticas, aprendimos a codificar aquello que solo habiamos visto como teoria, como crear expresoines regulares para moldear un leguaje fue una parte muy importante del proyecto pues fue la base ya que de las notas que el usuario introdujera al programa se generara una melodia en este caso un midi, creo que dejando a un lado el problema de la comunicacion el proyecto me resulto una muy buena forma para ver que tanto habia aprendido y que tanto era capaz de hacer incluso no teniendo el conociemiento de algunos temas, me gustaria seguir trabajando en este o en algun otro proyecto ya sin la presion tanto de la calificacion como de los demas proyectos y practicas que se ralizaron simultaneamente en esta y en otras materias.
 {\bf Flores García María Fernanda}\\
 La realización de esta práctica me pareció algo complicada, ya que si de por sí el trabajo en equipo ya es difícil, trabajar en equipo cuando no puedes interactuar de manera personal y en tiempo real con los compañeros de equipo se vuelve más difícil. Pero a decir verdad, me parece un muy buen método de evaluación del trabajo en equipo, ya que se pueden observar  las aportaciones de cada alumno al desarrollo del proyecto, también podemos observar la poca capacidad del equipo para organizarse y tener un trabajo equilibrado, podemos observar que dado que el modelo de estudio habla de competencias, para el desarrollo de este proyecto el trabajo prácticamente fue individual, ya que cada quien se preocupo por su participación sin llegar en ningún momento a un acuerdo sobre la forma de trabajo y la organización de las actividades; se torno más una competencia para ver en que parte de este proyecto se podía participar.
 En lo general el proyecto del compilador de melodías es interesante ya que es un proyecto donde se interactúa lo suficiente con el usuario como para conocer sus necesidades e intentar satisfacerlas al máximo. A pesar de no haber mostrado un gran aporte al desarrollo del proyecto, me llevo la experiencia de haber aprendido más  acerca de los temas vistos en las sesiones del laboratorio, es decir, Bison, Flex, etc., ya que la realización de este proyecto me sirvió para conocer mis debilidades en estos temas e intentar ir eliminándolas a base de práctica y estudio.\\
