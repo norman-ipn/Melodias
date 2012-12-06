@@ -1,0 +1,7 @@
+para compilar el sintactico deberia de ser con los siguientes comandos:
+bison -d sintactico.y
+flex lexico.l
+cc lex.yy.c sintactico.tab.c -o analizador -lfl -lm
+
+y estas pueden ser unas entradas:
+C DO Dom DO7 Dom7 DO# Do#m D RE Rem RE7 Rem7 RE# Re#m E MI Mim MI7 Mim7 F FA Fam FA7 Fam7 FA# Fa#m G SOL Solm SOL7 Solm7 SOL# Sol#m A LA Lam LA7 Lam7 LA# La#m B SI Sim SI7 Sim7 
