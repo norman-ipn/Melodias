@@ -1,6 +1,6 @@
 reporte_proyecto.dvi: reporte_proyecto.tex
   latex reporte_proyecto.tex
-reporte-proyecto.pdf: reporte_proyecto.dvi
+reporte_proyecto.pdf: reporte_proyecto.dvi
 	dvipdf reporte_proyecto.dvi
 view: reporte_proyecto.pdf
 	evince reporte_proyecto.pdf
