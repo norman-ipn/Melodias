@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -42,7 +41,7 @@ public  Melodias(){
     	JButton boton=new JButton();
     	boton=(JButton)a.getSource(); //Aqui solo hacemos un cast el evento para tenerlo de tipo JButton y sacar el texto
     	String notaaux=new String();
-    	if(boton.getText()=="Reproducir Completa"){ //La opcion reproducir Completa, bueno creo que es claro que hace
+    	if(boton.getText()=="Reproducir Completa"){ //La opcion reproducir Completa, reproduce todas las notas que hayamos tocado antes
     	try{
     	Runtime.getRuntime().exec("./melody notas.txt"); //Las sentencias de este tipo permiten ejecutar comandos de Linux
 	Runtime.getRuntime().exec("csound out.csd");}
