@@ -1,0 +1,691 @@
+\documentclass[12pt]{article}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+
+\title{\textbf{Compilador de Melodías}}
+\author{Barrera Paredes Ricardo\\
+Bustamante Escobar Juan Alfonso\\
+Flores García María Fernanda\\
+  	}
+\date{}
+\begin{document}
+
+\maketitle
+
+\section{Objetivo}
+
+Se pretende reafirmar los conocimientos adquiridos durante el curso de Teoría Computacional, tanto el conocimiento práctico como el conocimiento teórico que se abordo en clases y en las sesiones de laboratorio.
+
+\section{Introducción}
+Se conocerá paso a paso el proceso de desarrollo de un compilador de melodías. 
+
+Para la realización de este compilador de melodías fue necesario un arduo análisis que nos llevo a encontrar la gramática que lo modela y de también fue necesario crear las expresiones regulares que ayudaran al compilador a entender el lenguaje del usuario y tener una mejor interacción con este. 
+
+Se pretendía crear un compilador de melodías completo y que cubriera la mayoría de las necesidades y expectativas del usuario, pero como se sabe, somos principiantes en cuestiones de compiladores y el tiempo de desarrollo tal vez no fue el suficiente para crear un compilador con una interfaz interactiva y que cubriera por completo  las expectativas, ya que hasta el punto donde hemos llegado aún se pueden agregar más instrumentos y así el usuario pueda crear una canción donde interactúen diferentes tipos de instrumentos al mismo tiempo y se genere una melodía más compleja.
+
+Se conocerán a grandes rasgos las herramientas necesarias para el desarrollo y documentación de este proyecto y por último, conoceremos las experiencias de cada uno de los colaboradores y sus conclusiones acerca del trabajo llevado a cabo.
+
+\section{Herramientas}
+
+\begin{enumerate}
+
+\item Ubuntu OS.\\
+\item Vi, editor de textos de Ubuntu.\\
+\item Flex, analizador léxico\\
+\item CSound\\
+\item Bison\\
+\item Doxygen,creador de documentación.\\
+
+\end{enumerate}
+
+\section{Marco Teórico}
+{\bf Flex} es una herramienta para generar escaneres. Un escaner, a veces llamado un señalizador, es un programa que reconoce patrones léxicos en el texto.El programa flex lee especificados por el usuario archivos de entrada, o la entrada estándar si no se dan los nombres de archivo, para una descripción de un escáner a generar. La descripción está en la forma de parejas de expresiones regulares y código C, denominadas reglas. Flex genera un archivo fuente en C llamado "lex.yy.c", que define la función yylex (). El archivo "lex.yy.c" se puede compilar y enlazar para producir un ejecutable. Cuando el fichero ejecutable, este analiza su entrada en busca de casos de texto que coincidan con las expresiones regulares para cada regla. Cuando se encuentra una coincidencia, se ejecuta el código C correspondiente. \\
+
+
+{\bf CSound} es un diseño de sonido, la síntesis de música y sistema de procesamiento de señal,proporcionando instalaciones para la composición y el rendimiento en una amplia gama de plataformas. No se limita a cualquier estilo de música, después de haber sido utilizado durante muchos años en la creación de música clásica, pop, techno, ambient, experimental, y (por supuesto), música por ordenador, así como música para cine y televisión.
+
+Csound es ahora software libre publicado bajo la licencia GNU Lesser General Public. Es desarrollado por una comunidad de voluntarios y colaboradores nuevos son bienvenidos. Csound fue originalmente desarrollado por Barry L. Vercoe en el Grupo de Música y Cognición del Laboratorio de Medios del MIT, con el apoyo parcial de la Fundación para el Desarrollo del Sistema y de la National Science Foundation Grant\\
+
+{\bf Bison} es un generador de analizadores sintácticos de propósito general que convierte una anotada gramática libre de contexto en un determinista LR LR o generalizada (GLR) empleando analizador LALR (1) tablas del analizador. Como una característica experimental, Bison también puede generar IELR (1) o canónica LR (1) tablas del analizador. Una vez que son competentes con Bison, usted puede utilizarlo para desarrollar una amplia gama de analizadores de lenguajes, de los utilizados en las calculadoras de escritorio simples a complejos lenguajes de programación.\\
+
+{\bf Vi} (Visual) es un programa informático que entra en la categoría de los editores de texto. Esto es así, pues a diferencia de un procesador de texto no ofrece herramientas para determinar visualmente cómo quedará el documento impreso. Es por esto que carece de opciones como centrado o justificación de párrafos, pero permite mover, copiar, eliminar o insertar caracteres con mucha versatilidad. Este tipo de programas es frecuentemente utilizado por programadores para escribir código fuente de software.\\
+
+Un {\bf terminal}, conocido también como consola es un dispositivo electrónico o electromecánico de hardware, usado para introducir o mostrar datos de una computadora o de un sistema de computación.\\
+
+{\bf Ubuntu} es un sistema operativo predominantemente enfocado en la facilidad de uso e instalación, la libertad de los usuarios, y los lanzamientos regulares (cada 6 meses). El nombre proviene del concepto africano ubuntu, que significa "humanidad hacia otros" o "yo soy porque nosotros somos". También es el nombre de un movimiento humanista sudafricano. Ubuntu aspira a impregnar de esa mentalidad al mundo de las computadoras. El eslogan de Ubuntu “Linux para seres humanos” resume una de sus metas principales: hacer de Linux un sistema operativo más accesible y fácil de usar. El proyecto Ubuntu está totalmente basado en los principios del Software Libre y anima a que la gente use, mejore y distribuya software libre.
+
+\section{Desarrollo}
+
+\begin{enumerate}
+\item Darnos de alta en \emph{http://github.com}.
+\item Analizar el problema que queremos abordar\\
+\item Resolver  con el profesor todas las dudas que se tengan acerca del planteamiento del problema, los limites de este y las consideraciones que debemos tener presentes.\\
+\item Instalar el software necesario para llevar a cabo la programación del compilador de melodías.\\
+\item Investigar en que software podemos apoyarnos para que nuestro compilador funcione de la mejor manera y se encuentre lo más completo posible.\\
+\item Investigar el uso CSound.\\
+\item Analizar nuevamente los archivos hechos en clase de Flex y Bison por si se tiene alguna duda del funcionamiento de estas herramientas.\\
+\item Se establecen los formatos de entrada y salida del compilador.
+\item Se programan a la par el archivo de Flex y el archivo de Bison, ya que las expresiones regulares y la gramática de nuestro compilador se deben crear al mismo tiempo para hacer las modificaciones en ambos archivos.\\
+\item Editar la parte del archivo que esta en Código C ya que es donde se establecen los archivos de Entrada y Salida del compilador.\\
+\item Crear el archivo Makefile que será el encargado de generar todos los archivos necesarios para la compilación del  proyecto.\\
+\item Correr el programa para comprobar que no exista ningún error.\\
+\item Corregir los errores encontrados.\\
+\item Volver  a correr el programa.\\
+\item En caso de que el programa ya no cuente con errores, se procede con la documentación, que en este caso es este archivo en Latex.\\
+
+\end{enumerate}
+
+\section{Códigos}
+En esta sección se podrán observar los códigos que conforman el proyecto de Compilador de melodías.
+
+\begin{enumerate}
+
+\item {\bf Makefile}\\
+\begin{lstlisting}[language=C]
+run: melody notas.txt
+	./melody "notas.txt"
+compile: lex.yy.c parser.tab.c csd.c
+	gcc lex.yy.c parser.tab.c csd.c -o melody -lfl -lm
+getlexer:
+	flex lexer.l
+getparser: parser.y
+	bison -d parser.y
+clear:
+	rm parser.tab.c
+	rm parser.tab.h
+	rm lex.yy.c
+	rm out.csd
+	rm melody
+\end{lstlisting}\\
+
+\item {\bf .gitignore}\\
+\begin{lstlisting}[language=C]
+# Object files
+*.o
+
+
+# Libraries
+*.lib
+*.a
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+\end{lstlisting}\\
+
+\item {\bf csd.c}\\
+\begin{lstlisting}[language=C]
+#include "csd.h"
+void file_start( FILE *fp )
+{
+	fprintf( fp, "<CSoundSynthesizer>\n\n" );
+	fprintf( fp, "\t<CsOptions>\n" );
+	fprintf( fp, "\t\t-odac\n" );
+	fprintf( fp, "\t</CsOptions>\n" );
+	fprintf( fp, "\t<CsInstruments>\n" );
+	fprintf( fp, "\t\tsr = 44100\n" );
+	fprintf( fp, "\t\tksmps = 32\n" );
+	fprintf( fp, "\t\tnchnls = 2\n" );
+	fprintf( fp, "\t\t0dbfs = 1\n\n" );
+	fprintf( fp, "\t\tinstr 1\n" );
+	fprintf( fp, "\t\t\tasig oscils .2, p4, 0\n" );
+	fprintf( fp, "\t\t\t\touts asig, asig\n" );
+	fprintf( fp, "\t\tendin\n\n" );
+	fprintf( fp, "\t</CsInstruments>\n\n" );
+	fprintf( fp, "\t<CsScore>\n\n" );
+}
+
+void file_end( FILE *fp )
+{
+	fprintf( fp, "\t</CsScore>\n\n" );
+	fprintf( fp, "</CsoundSynthesizer>\n" );
+}
+
+void write_line( FILE *fp, char note, char octave, char flat, char sharp, float start )
+{
+	float frequency = 0;
+	float frequency_list[] =	{ 65.406, 69.296, 73.416, 77.782, 82.407, 87.307, 92.499, 97.999, 103.826, 110.0, 116.541, 123.471 };			
+					  /*Do */ /*Do#*/ /*Re */ /*Re#*/ /*Mi */ /*Fa */ /*Fa#*/ /*Sol*/ /*Sol#*/ /*La*/ /*La# */ /*Si  */
+					  /*Si#*/ /*Reb*/ 	  /*Mib*/ /*Fab*/ /*Mi#*/ /*Solb*/	  /*Lab */   	  /*Sib */ /*Dob */ 
+	int octaven = 0;
+	switch ( octave )
+	{
+		case '1':
+			octaven = 1;
+			break;
+		case '2':
+			octaven = 2;
+			break;
+		case '3':
+			octaven = 3;
+			break;
+		case '4':
+			octaven = 4;
+			break;
+		case '5':
+			octaven = 5;
+			break;
+		case '6':
+			octaven = 6;
+			break;
+		case '7':
+			octaven = 7;
+			break;
+		default:
+			octaven = 7;
+			
+	}
+	
+	switch( note )
+	{
+	
+		case 'C':
+			if( sharp == '\0' && flat == '\0' )
+			{
+				frequency = frequency_list[0];
+			}
+			else
+			{
+				if( sharp != '\0' )
+				{
+					frequency = frequency_list[1];
+				}
+				else
+				{
+					frequency = frequency_list[11];
+				}
+			}
+			break;
+		case 'D':
+			if( sharp == '\0' && flat == '\0' )
+			{
+				frequency = frequency_list[2];
+			}
+			else
+			{
+				if( sharp != '\0' )
+				{
+					frequency = frequency_list[3];
+				}
+				else
+				{
+					frequency = frequency_list[1];
+				}
+			}
+			break;
+		case 'E':
+			if( sharp == '\0' && flat == '\0' )
+			{
+				frequency = frequency_list[4];
+			}
+			else
+			{
+				if( sharp != '\0' )
+				{
+					frequency = frequency_list[5];
+				}
+				else
+				{
+					frequency = frequency_list[3];
+				}
+			}
+			break;
+		case 'F':
+			if( sharp == '\0' && flat == '\0' )
+			{
+				frequency = frequency_list[5];
+			}
+			else
+			{
+				if( sharp != '\0' )
+				{
+					frequency = frequency_list[6];
+				}
+				else
+				{
+					frequency = frequency_list[4];
+				}
+			}
+			break;
+		case 'G':		
+			if( sharp == '\0' && flat == '\0' )
+			{
+				frequency = frequency_list[7];
+			}
+			else
+			{
+				if( sharp != '\0' )
+				{
+					frequency = frequency_list[8];
+				}
+				else
+				{
+					frequency = frequency_list[6];
+				}
+			}
+			break;
+		case 'A':
+			if( sharp == '\0' && flat == '\0' )
+			{
+				frequency = frequency_list[9];
+			}
+			else
+			{
+				if( sharp != '\0' )
+				{
+					frequency = frequency_list[10];
+				}
+				else
+				{
+					frequency = frequency_list[8];
+				}
+			}
+			break;
+		case 'B':
+			if( sharp == '\0' && flat == '\0' )
+			{
+				frequency = frequency_list[11];
+			}
+			else
+			{
+				if( sharp != '\0' )
+				{
+					frequency = frequency_list[1];
+				}
+				else
+				{
+					frequency = frequency_list[10];
+				}
+			}
+			break;
+	}
+
+	frequency = frequency * pow( 2, octaven - 1 );
+
+	fprintf( fp, "\t\ti1\t%f\t1\t%f\n", start, frequency );
+}
+\end{lstlisting}\\
+
+\item {\bf csd.h}\\
+\begin{lstlisting}[language=C]
+#ifndef __CSD_H__
+#define __CSD_H__
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+void file_start( FILE *fp );
+void file_end( FILE *fp );
+void write_line( FILE *fp, char note, char octave, char bemol, char sharp, float start );
+
+#endif
+\end{lstlisting}\\
+
+
+\item {\bf Ejemplo.csd}\\
+\begin{lstlisting}[language=C]
+<CsoundSynthesizer>	
+	<CsOptions>
+		-o ejemplo1.mp3
+	</CsOptions>
+	
+	<CsInstruments>
+	
+		sr	=	10000
+		ksmps	=	32
+		nchnls	=	2
+		0dbfs	=	1
+
+		instr 1
+			asig    oscils	.2, 440, 0
+        			outs    asig, asig
+                endin
+		instr 2
+			asig    oscils	.2, 100, 100
+        			outs    asig, asig
+	        endin
+                instr 3
+			asig    oscils	.2, 200, 100
+        			outs    asig, asig
+	        endin
+		instr 4
+			asig    oscils	.2, 1000, 100
+        			outs    asig, asig
+	        endin
+	
+	</CsInstruments>
+	;Edición.
+	<CsScore>
+
+
+                ;
+CICLO do re mi fa sol la si
+                       i 1	0	1	523.251; aquí van las frecuencias. ejemplo este es un Do o C
+		i 4	0	1	523.251
+		i 1	1.01	1	587.33
+		i 4	1.01	1	587.33
+		i 1	2.01	1	659.255
+		i 4	2.01	1	659.255
+		i 1	3.01	1	698.456
+		i 2	3.01	1	698.456
+		i 3	4.01	1	783.991
+		i 2	4.01	1	783.991
+		i 1	5.01	1	880
+		i 2	5.01	1	880
+		i 1	6.01	1	987.767
+		i 2	6.01	1	987.767
+		i 1	7.01	1	1046.502
+		i 2	7.01	1	1046.502
+		i 1      9.01    1       1046.502
+		i 2     9.01    1       1046.502
+		i 1     10.01   1       987.767
+		i 2     10.01   1       987.767
+        	           i 1     11.01   1       880
+                      i 2     11.01   1       880
+	           i 1     12.01   1       783.991
+	           i 2     12.01   1       783.991
+        	           i 1     13.01   1       698.456
+        	           i 2     13.01   1       698.456
+	           i 1     14.01   1       659.255
+                      i 2     14.01   1       659.255
+        	           i 1     15.01   1       587.33
+        	           i 2     15.01   1       587.33
+	           i 1     16.01   1       523.251
+	           i 2     16.01   1       523.251
+	; la misma nota en graves y agudos.
+	
+		i 1	17.01	3	523.251
+		i 2	17.01	3	523.251
+		i 3	17.01	3	523.251
+		i 4	17.01	3	523.251
+	
+	</CsScore>
+	
+
+</CsoundSynthesizer>	
+\end{lstlisting}\\
+
+
+\item {\bf lexer.l}\\
+\begin{lstlisting}[language=C]
+
+%{
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include "parser.tab.h"
+
+%}
+
+NOTE	[A|B|C|D|E|F|G]
+OCTAVE	[1|2|3|4|5|6|7]
+SHARP	[#]
+FLAT	[b]
+MINOR	[m]
+
+%%
+
+{NOTE}		{
+			yylval.symbol = *yytext;
+			return (NOTE);
+		}
+{OCTAVE}	{
+			yylval.symbol = *yytext;
+			return (OCTAVE);
+		}
+{SHARP}		{
+			yylval.symbol = *yytext;
+			return (SHARP);
+		}
+{FLAT}		{
+			yylval.symbol = *yytext;
+			return (FLAT);
+		}
+{MINOR}		{
+			yylval.symbol = *yytext;	
+			return (MINOR);
+		}
+
+%%
+
+\end{lstlisting}\\
+
+\item {\bf Notas.l}\\
+\begin{lstlisting}[language=C]
+/* scanner for a toy Pascal-like language */
+
+%{
+#include <stdio.h>
+#include "csd.h"
+FILE *fp=NULL;
+%}
+
+
+
+%%
+
+do|Do|DO|c|C {escribir(fp,yytext,"65,406");}
+
+re|Re|RE|d|D {escribir(fp,yytext,"73,416");}
+
+mi|Mi|MI|e|E {escribir(fp,yytext,"82,407");}
+
+fa|Fa|FA|f|F {escribir(fp,yytext,"87,307");}
+
+sol|Sol|SOL|g|G {escribir(fp,yytext,"97,999");}
+
+la|La|LA|a|A {escribir(fp,yytext,"110");}
+
+si|Si|SI|b|B {escribir(fp,yytext,"123,471");}
+
+%%
+
+int main( int argc, char **argv )
+    {
+    
+    fp=fopen("practica2.csd","w");
+    ++argv, --argc;  /* skip over program name */
+    if ( argc > 0 ){
+            yyin = fopen( argv[0], "r" );
+	}
+    else{
+	    
+            yyin = stdin;
+	}
+    escribir_encabezado(fp); 
+    yylex();
+    escribir_fin(fp);
+    fclose(fp);
+    return 0;
+}
+
+yywrap()
+{
+}
+\end{lstlisting}\\
+
+\item {\bf parser.y}\\
+\begin{lstlisting}[language=C]
+%{
+
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include "csd.h"
+
+	extern FILE *yyin;
+	void yyerror( char *s );
+	extern int yylex( void );
+	extern char *yytext;
+	FILE *fp = NULL;
+	float start = 0;
+	
+%}
+
+%union
+{
+	char 	symbol;
+	int 	digit;
+}
+
+%start START
+
+%token <symbol>	NOTE
+%token <symbol>	OCTAVE
+%token <symbol>	SHARP
+%token <symbol>	FLAT
+%token <symbol>	MINOR
+
+%%
+
+START: 	value START 
+	| value
+
+value: 	NOTE			{
+					printf( "Nota: %c\n", $1 );
+					write_line( fp, $1, '\0', '\0', '\0', start );
+					start = start + 1.01;
+				}
+
+	| NOTE OCTAVE 		{
+					printf( "Nota: %c, Octava: %c\n", $1, $2 );
+					write_line( fp, $1, $2, '\0', '\0', start );
+					start = start + 1.01;
+				}
+
+	| NOTE OCTAVE SHARP	{
+					printf( "Nota: %c, Octava:  %c, Sostenido: %c\n", $1, $2, $3 );
+					write_line( fp, $1, $2, '\0', $3, start );
+					start = start + 1.01;
+				}
+
+	| NOTE OCTAVE FLAT	{
+					printf( "Nota: %c, Octava: %c, Bemol: %c\n", $1, $2, $3 );
+					write_line( fp, $1, $2, $3, '\0', start );
+					start = start + 1.01;
+				}
+
+%%
+
+void yyerror( char *s )
+{
+	printf( "Error sintactico %s \n", s );
+}
+
+int main( int argc, char **argv )
+{
+	fp = fopen( "out.csd", "w" );
+	
+	file_start( fp );
+
+	if( argc > 1 )
+	{
+		yyin = fopen( argv[1], "rt" );
+	}
+	else
+	{
+		yyin = stdin;
+		yyin = fopen( "file.txt", "rt" );
+	}
+
+	yyparse();
+
+	file_end( fp );
+	
+	return 0;
+\end{lstlisting}\\
+
+\item {\bf prueba.csd}\\
+\begin{lstlisting}[language=C]
+<CSoundSynthesizer>
+
+	<CsOptions>
+		-odac	; Indica que la la salida pasará por un convertidor Digital-Analógoco (DAC) y será reproducida
+	</CsOptions>
+	
+	<CsInstruments>
+	
+		sr	=	44100
+		ksmps	=	32
+		nchnls	=	2
+		0dbfs	=	1
+
+		instr 1
+			asig    oscils	.2, p4, 0
+        			outs    asig, asig
+	        endin
+	
+	</CsInstruments>
+	
+	<CsScore>
+	
+		i 1	0	1	523.251
+		i 1	1.01	1	587.33
+		i 1	2.01	1	659.255
+		i 1	3.01	1	698.456
+		i 1	4.01	1	783.991
+		i 1	5.01	1	880
+		i 1	6.01	1	987.767
+		i 1	7.01	1	1046.502
+
+		i 1     9.01    1       1046.502
+		i 1     10.01   1       987.767
+        		i 1     11.01   1       880
+	           i 1     12.01   1       783.991
+        	i 1     13.01   1       698.456
+	           i 1     14.01   1       659.255
+        	i 1     15.01   1       587.33
+	           i 1     16.01   1       523.251
+	
+	</CsScore>
+	
+</CsoundSynthesizer>
+\end{lstlisting}\\
+
+
+
+
+\end{enumerate}
+
+
+\section{Conclusiones}
+
+{\bf Bustamante Escobar Juan Alfonso}
+
+{\bf Flores García María Fernanda}\\
+La realización de esta práctica me pareció algo complicada, ya que si de por sí el trabajo en equipo ya es difícil, trabajar en equipo cuando no puedes interactuar de manera personal y en tiempo real con los compañeros de equipo se vuelve más difícil. Pero a decir verdad, me parece un muy buen método de evaluación del trabajo en equipo, ya que se pueden observar  las aportaciones de cada alumno al desarrollo del proyecto, también podemos observar la poca capacidad del equipo para organizarse y tener un trabajo equilibrado, podemos observar que dado que el modelo de estudio habla de competencias, para el desarrollo de este proyecto el trabajo prácticamente fue individual, ya que cada quien se preocupo por su participación sin llegar en ningún momento a un acuerdo sobre la forma de trabajo y la organización de las actividades; se torno más una competencia para ver en que parte de este proyecto se podía participar.
+En lo general el proyecto del compilador de melodías es interesante ya que es un proyecto donde se interactúa lo suficiente con el usuario como para conocer sus necesidades e intentar satisfacerlas al máximo. A pesar de no haber mostrado un gran aporte al desarrollo del proyecto, me llevo la experiencia de haber aprendido más  acerca de los temas vistos en las sesiones del laboratorio, es decir, Bison, Flex, etc., ya que la realización de este proyecto me sirvió para conocer mis debilidades en estos temas e intentar ir eliminándolas a base de práctica y estudio.\\
+
+
+\section{Anexo}
+{\bf Github}\\
+GitHub fue originalmente diseñado para desarrollar software. Permite subir código por medio de su web y compartirlo. Cualquiera puede modificar el código de otro, y Github realiza un seguimiento de quién hizo qué cambios y dónde. Y, como herramienta de control de versiones que es, ayuda a fusionar (merges) los cambios.Es un control de versiones distribuido. Un control de versiones en cloud. La red social del desarrollo de código.
+
+Un servicio en hosting para compartir código a través de una interfaz web. Importante recordar, dejo este post, lo que supone el control de versiones en desarrollo software.
+
+Proyectos de código abierto lo pueden utilizar de forma gratuita, pero las empresas pagan por alojar sus propias versiones privadas en GitHub.
+
+El corazón de Github es Git, creado en 2005 por Linus Torvalds, un software de control de versiones, cuya principal aportación fue que el repositorio de ficheros en vez de centralizado es distribuido (tienes un repositorio local y luego puedes subir los cambios al repositorio compartido). Github es un Git en hosting con una interface web.\\
+
+
+\section{BIBLIOGRAFIA}
+
+\begin{thebibliography}{101}
+
+\bibitem [Manual Latex]{Manual Latex} \url {http://es.wikibooks.org/wiki/Manual_de_LaTeX/Insertar_figuras_en_un_documento}\\
+\bibitem [Expresiones Regulares]{Expresiones Regulares}\url {http://enavas.blogspot.mx/2008/03/linux-expresiones-regulares.html}\\
+\bibitem [Ubuntu]{Ubuntu} \url {http://doc.ubuntu-es.org/Sobre_Ubuntu}\\
+\end{thebibliography}
+
+
+\end{document}
