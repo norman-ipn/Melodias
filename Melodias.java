@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -13,7 +14,7 @@ public class Melodias implements ActionListener{
 	static JPanel principal=new JPanel();
   	static JLabel label1=new JLabel();
   	static String notas[]={"Do","Re","Mi","Fa","Sol","La","Si"};
-  	static TextField notastexto=new TextField("Introduce Aqui tus Notas");  //Un pequeño TextField que permite ingresar las notas, presionar  enter para escuchar
+  	static TextField notastexto=new TextField("Introduce Aqui tus Notas");
 public  Melodias(){
 	JFrame melodia = new JFrame("Compilador de Melodias" ); 
         melodia.setVisible(true);
@@ -49,7 +50,15 @@ public  Melodias(){
 				TextOut.close();
 				Runtime.getRuntime().exec("./melody notasaux.txt");
 				Runtime.getRuntime().exec("csound out.csd");
-			} catch(Exception e){}	return;}
+			} catch(Exception e){}	
+			try{
+    				File TextFile = new File("notas.txt");
+				FileWriter TextOut = new FileWriter(TextFile, true);
+				TextOut.write(notastexto.getText()+" ");
+				TextOut.close();
+				} catch(Exception e){}
+			return;
+	}
     	JButton boton=new JButton();
     	boton=(JButton)a.getSource();
     	String notaaux=new String();
