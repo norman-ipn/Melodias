@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -43,7 +42,6 @@ public  Melodias(){
 }
     public void actionPerformed(ActionEvent a){
 	if(a.getSource()==notastexto){
-		System.out.println("Ya se");
 		 	try{
     				File TextFile = new File("notasaux.txt");
 				FileWriter TextOut = new FileWriter(TextFile, false);
