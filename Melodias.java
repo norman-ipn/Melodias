@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -7,12 +8,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.awt.event.ActionListener;
 public class Melodias implements ActionListener{
-  static JButton completa=new JButton();
+	static JButton completa=new JButton();
 	static JButton a[]=new JButton[7];
 	static JPanel teclado=new JPanel();
 	static JPanel principal=new JPanel();
   	static JLabel label1=new JLabel();
   	static String notas[]={"Do","Re","Mi","Fa","Sol","La","Si"};
+  	static TextField notastexto=new TextField("Introduce Aqui tus Notas");  //Un pequeño TextField que permite ingresar las notas, presionar  enter para escuchar
 public  Melodias(){
 	JFrame melodia = new JFrame("Compilador de Melodias" ); 
         melodia.setVisible(true);
@@ -28,8 +30,10 @@ public  Melodias(){
 	}
 	completa.setText("Reproducir Completa");
 	completa.addActionListener(this);
+	notastexto.addActionListener(this);
 	label1.setText("Para producir una nota, tan solo presiona sobre ella");
 	principal.setLayout(new BorderLayout());
+	principal.add(notastexto,BorderLayout.EAST);
 	principal.add(label1,BorderLayout.NORTH);
 	principal.add(teclado,BorderLayout.SOUTH);
 	principal.add(completa,BorderLayout.WEST);
@@ -38,17 +42,27 @@ public  Melodias(){
 
 }
     public void actionPerformed(ActionEvent a){
+	if(a.getSource()==notastexto){
+		System.out.println("Ya se");
+		 	try{
+    				File TextFile = new File("notasaux.txt");
+				FileWriter TextOut = new FileWriter(TextFile, false);
+				TextOut.write(notastexto.getText()+" ");
+				TextOut.close();
+				Runtime.getRuntime().exec("./melody notasaux.txt");
+				Runtime.getRuntime().exec("csound out.csd");
+			} catch(Exception e){}	return;}
     	JButton boton=new JButton();
-    	boton=(JButton)a.getSource(); //Aqui solo hacemos un cast el evento para tenerlo de tipo JButton y sacar el texto
+    	boton=(JButton)a.getSource();
     	String notaaux=new String();
-    	if(boton.getText()=="Reproducir Completa"){ //La opcion reproducir Completa, reproduce todas las notas que hayamos tocado antes
+    	if(boton.getText()=="Reproducir Completa"){
     	try{
-    	Runtime.getRuntime().exec("./melody notas.txt"); //Las sentencias de este tipo permiten ejecutar comandos de Linux
+    	Runtime.getRuntime().exec("./melody notas.txt");
 	Runtime.getRuntime().exec("csound out.csd");}
 	catch(Exception b){}
     		}
     	else{
-    	if(boton.getText()=="Do")   //En esta seccion convertimos las notas a su notacion equivalente
+    	if(boton.getText()=="Do")
     		notaaux="C";
     	if(boton.getText()=="Re")
     		notaaux="D";
@@ -64,7 +78,7 @@ public  Melodias(){
     		notaaux="B";
     	try{
     	File TextFile = new File("notasaux.txt");
-	FileWriter TextOut = new FileWriter(TextFile, false); //Al tener FileWrier en false, sobreescribimos el archivo, ya que al reproducir solo una nota, no nos interesa lo demas
+	FileWriter TextOut = new FileWriter(TextFile, false);
 	TextOut.write(notaaux+" ");
 	TextOut.close();
 	Runtime.getRuntime().exec("./melody notasaux.txt");
@@ -72,9 +86,9 @@ public  Melodias(){
 	} catch(Exception e){}
     	try{
     	File TextFile = new File("notas.txt");
-	FileWriter TextOut = new FileWriter(TextFile, true); //Al estar en true se conserva lo que ya tiene el archivo
+	FileWriter TextOut = new FileWriter(TextFile, true);
 	TextOut.write(notaaux+" ");
-	TextOut.close(); 
+	TextOut.close();
 	} catch(Exception e){}
     }
 }
